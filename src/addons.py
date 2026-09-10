@@ -699,8 +699,6 @@ def stream_media_file(url: str, src: str, headers: str|None = None, cookies: str
         headers_dict = json.loads(headers) if headers else {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         }
-        if client_range := request.headers.get('Range'):
-            headers_dict['Range'] = client_range
         response = requests.get(src, stream=True, headers=headers_dict, cookies=load_http_cookies(cookies), proxies=proxies)
         response.raise_for_status()
         mime_type = response.headers.get('Content-Type', 'application/octet-stream')
